@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Dia das Mães</title>
+    <meta
+      name="description"
+      content="Uma homenagem em HTML puro com memórias, carinho e humor para o Dia das Mães."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #140d0e;
+        --panel: rgba(255, 255, 255, 0.08);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #fff6f0;
+        --muted: rgba(255, 246, 240, 0.74);
+        --gold: #f1d0a7;
+        --shadow: 0 24px 90px rgba(0, 0, 0, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        font-family: "Manrope", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(255, 205, 165, 0.15), transparent 28%),
+          radial-gradient(circle at 80% 20%, rgba(240, 172, 162, 0.12), transparent 25%),
+          linear-gradient(180deg, #140d0e 0%, #1c1112 52%, #140d0e 100%);
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .page-noise {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.1;
+        background-image:
+          radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.2) 1px, transparent 0);
+        background-size: 22px 22px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent);
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 16px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--gold);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .section-head {
+        max-width: 760px;
+        margin: 0 auto 46px;
+        text-align: center;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        line-height: 0.96;
+      }
+
+      .section-head p {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.9;
+      }
+
+      .hero {
+        padding: 24px 0 70px;
+      }
+
+      .hero-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 34px;
+        min-height: calc(100vh - 48px);
+        background:
+          linear-gradient(100deg, rgba(16, 9, 10, 0.9) 0%, rgba(16, 9, 10, 0.7) 44%, rgba(16, 9, 10, 0.16) 100%),
+          url("https://snipboard.io/NkAyMd.jpg") center/cover no-repeat;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top, rgba(255, 231, 203, 0.12), transparent 34%),
+          linear-gradient(to top, rgba(17, 9, 10, 0.8), rgba(17, 9, 10, 0.08));
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+        min-height: calc(100vh - 48px);
+        padding: 36px;
+      }
+
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 36px;
+        max-width: 860px;
+      }
+
+      .hero-copy h1 {
+        max-width: 760px;
+        margin: 22px 0 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3.4rem, 7vw, 6.4rem);
+        line-height: 0.92;
+      }
+
+      .hero-copy p {
+        max-width: 640px;
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.95;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .button-primary,
+      .button-secondary,
+      .button-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        padding: 12px 22px;
+        border-radius: 999px;
+        transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      }
+
+      .button-primary:hover,
+      .button-secondary:hover,
+      .button-ghost:hover {
+        transform: translateY(-1px);
+      }
+
+      .button-primary {
+        background: var(--gold);
+        color: #251716;
+        font-weight: 800;
+      }
+
+      .button-secondary,
+      .button-ghost,
+      .glass-panel {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .button-secondary,
+      .button-ghost {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .quote-box,
+      .glass-panel {
+        border-radius: 26px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 18px 70px rgba(0, 0, 0, 0.2);
+      }
+
+      .quote-box {
+        max-width: 520px;
+        padding: 22px 24px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 246, 240, 0.82);
+        font-size: 0.98rem;
+        line-height: 1.85;
+      }
+
+      .glass-panel {
+        align-self: end;
+        padding: 28px;
+      }
+
+      .glass-panel h3 {
+        margin: 0 0 16px;
+        color: var(--gold);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+
+      .hero-metric {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-metric:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .hero-metric span {
+        color: rgba(255, 246, 240, 0.48);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .hero-metric strong {
+        max-width: 180px;
+        text-align: right;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      section {
+        padding: 28px 0 84px;
+      }
+
+      .memory-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 250px;
+      }
+
+      .memory-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: 0 14px 60px rgba(0, 0, 0, 0.2);
+      }
+
+      .memory-card:nth-child(1) {
+        grid-column: span 7;
+        grid-row: span 2;
+      }
+
+      .memory-card:nth-child(2),
+      .memory-card:nth-child(3) {
+        grid-column: span 5;
+      }
+
+      .memory-card:nth-child(4) {
+        grid-column: span 7;
+      }
+
+      .memory-card img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .memory-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(16, 10, 11, 0.95), rgba(16, 10, 11, 0.12) 58%, transparent);
+      }
+
+      .memory-copy {
+        position: absolute;
+        inset: auto 0 0 0;
+        z-index: 1;
+        padding: 24px;
+      }
+
+      .memory-copy span {
+        color: var(--gold);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .memory-copy h3 {
+        margin: 12px 0 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 3vw, 2.9rem);
+        line-height: 0.98;
+      }
+
+      .memory-copy p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .gratitude-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .gratitude-card {
+        padding: 26px;
+      }
+
+      .gratitude-card small {
+        display: inline-flex;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--gold);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .gratitude-card h3 {
+        margin: 18px 0 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.2rem;
+        line-height: 1;
+      }
+
+      .gratitude-card p {
+        margin: 14px 0 0;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .question-shell {
+        position: relative;
+        overflow: hidden;
+        padding: 28px;
+      }
+
+      .question-grid {
+        position: relative;
+        display: grid;
+        gap: 22px;
+        grid-template-columns: minmax(0, 1.12fr) minmax(280px, 360px);
+      }
+
+      .question-box,
+      .question-side {
+        padding: 24px;
+      }
+
+      .question-helper {
+        color: var(--muted);
+        line-height: 1.85;
+      }
+
+      .question-translation {
+        margin-top: 22px;
+        padding: 20px;
+        border: 1px solid rgba(241, 208, 167, 0.26);
+        border-radius: 22px;
+        background: rgba(241, 208, 167, 0.08);
+      }
+
+      .question-translation span,
+      .question-side span {
+        color: var(--gold);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .question-translation h3,
+      .question-side h3 {
+        margin: 12px 0 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 0.98;
+      }
+
+      .question-side p,
+      .accepted-box p {
+        margin: 14px 0 0;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .question-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .no-button {
+        transition: transform 180ms ease, background 180ms ease;
+      }
+
+      .accepted-box {
+        display: none;
+        margin-top: 24px;
+        padding: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 24px;
+        background: rgba(132, 199, 164, 0.1);
+      }
+
+      .accepted-box strong {
+        display: block;
+        color: #def3e5;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .question-shell.accepted .accepted-box {
+        display: block;
+      }
+
+      .question-shell.accepted .question-actions {
+        display: none;
+      }
+
+      .question-shell.accepted .hearts {
+        opacity: 1;
+      }
+
+      .hearts {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 220ms ease;
+      }
+
+      .heart {
+        position: absolute;
+        bottom: -24px;
+        font-size: 1.5rem;
+        color: rgba(255, 227, 207, 0.9);
+        animation: floatHeart var(--duration, 4.4s) ease-in forwards;
+        animation-delay: var(--delay, 0s);
+      }
+
+      .side-diagnosis {
+        margin-top: 22px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.16);
+      }
+
+      .side-diagnosis strong {
+        display: block;
+        color: rgba(255, 246, 240, 0.55);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .final-card {
+        position: relative;
+        overflow: hidden;
+        padding: 34px;
+      }
+
+      .final-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.12), transparent 28%);
+        pointer-events: none;
+      }
+
+      .final-card h2 {
+        max-width: 760px;
+        margin: 20px 0 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        line-height: 0.96;
+      }
+
+      .final-card p {
+        max-width: 820px;
+        color: var(--muted);
+        line-height: 1.95;
+      }
+
+      .signature {
+        margin-top: 24px;
+        color: var(--gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+      }
+
+      .footer-note {
+        margin-top: 20px;
+        color: rgba(255, 246, 240, 0.46);
+        font-size: 0.92rem;
+      }
+
+      @keyframes floatHeart {
+        0% {
+          transform: translate3d(0, 0, 0) scale(0.86);
+          opacity: 0;
+        }
+        12% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate3d(-10px, -460px, 0) scale(1.12);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .question-grid,
+        .gratitude-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-card,
+        .hero-grid {
+          min-height: auto;
+        }
+
+        .hero-grid {
+          padding: 24px;
+        }
+
+        .memory-grid {
+          grid-template-columns: 1fr;
+          grid-auto-rows: minmax(280px, auto);
+        }
+
+        .memory-card:nth-child(1),
+        .memory-card:nth-child(2),
+        .memory-card:nth-child(3),
+        .memory-card:nth-child(4) {
+          grid-column: auto;
+          grid-row: auto;
+          min-height: 340px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          width: min(100% - 20px, 1120px);
+        }
+
+        .hero,
+        section {
+          padding-bottom: 66px;
+        }
+
+        .hero-grid,
+        .question-shell,
+        .question-box,
+        .question-side,
+        .final-card,
+        .gratitude-card {
+          padding: 20px;
+        }
+
+        .hero-copy h1 {
+          font-size: 3rem;
+        }
+
+        .quote-box,
+        .glass-panel,
+        .memory-card,
+        .question-shell,
+        .final-card {
+          border-radius: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+
+    <header class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <div>
+                <div class="pill">Dia das Mães 2026</div>
+                <h1>Para a mulher que fez do amor o lugar mais seguro do mundo.</h1>
+                <p>
+                  Este presente em forma de site foi feito para te abraçar com
+                  memórias, carinho e um pouquinho de humor. Cada parte daqui
+                  existe para lembrar o quanto você é amada e o quanto sua
+                  presença deixa tudo mais bonito.
+                </p>
+                <div class="hero-actions">
+                  <a class="button-primary" href="#memorias">Ver nossas memórias</a>
+                  <a class="button-secondary" href="#pergunta">Responder minha pergunta</a>
+                </div>
+              </div>
+
+              <div class="quote-box">
+                “Algumas pessoas iluminam um dia. Você iluminou uma vida inteira.”
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="memorias">
+        <div class="container">
+          <div class="section-head">
+            <div class="pill">Memórias que importam</div>
+            <h2>Cada foto aqui carrega um pedaço do amor que construiu a nossa história.</h2>
+            <p>
+              A ideia não é só mostrar imagens bonitas. É fazer cada lembrança
+              respirar de novo, como se o tempo parasse por alguns segundos só
+              para agradecer.
+            </p>
+          </div>
+
+          <div class="memory-grid">
+            <article class="memory-card">
+              <img
+                src="https://snipboard.io/VKUdRf.jpg"
+                alt="Foto da mãe com a família em um momento especial."
+              />
+              <div class="memory-copy">
+                <span>Capítulo 1</span>
+                <h3>Afeto que vira memória</h3>
+                <p>
+                  Tem lembrança que não precisa de legenda, porque o carinho já
+                  aparece antes de qualquer palavra.
+                </p>
+              </div>
+            </article>
+
+            <article class="memory-card">
+              <img
+                src="https://snipboard.io/pkMFow.jpg"
+                alt="Registro de um momento feliz em família."
+              />
+              <div class="memory-copy">
+                <span>Capítulo 2</span>
+                <h3>Nossa história mais bonita</h3>
+                <p>
+                  Cada fase ganhou mais cor porque você sempre esteve ali,
+                  fazendo tudo parecer mais leve.
+                </p>
+              </div>
+            </article>
+
+            <article class="memory-card">
+              <img
+                src="https://snipboard.io/Dxfh73.jpg"
+                alt="Família reunida em um momento marcante."
+              />
+              <div class="memory-copy">
+                <span>Capítulo 3</span>
+                <h3>Casa em forma de abraço</h3>
+                <p>
+                  Seu cuidado tem esse dom raro de transformar rotina em paz e
+                  presença em acolhimento.
+                </p>
+              </div>
+            </article>
+
+            <article class="memory-card">
+              <img
+                src="https://snipboard.io/dyFiJh.jpg"
+                alt="Foto cheia de ternura entre mãe e família."
+              />
+              <div class="memory-copy">
+                <span>Capítulo 4</span>
+                <h3>Amor que continua crescendo</h3>
+                <p>
+                  As fotos congelam instantes, mas o que elas guardam mesmo é
+                  tudo aquilo que você nos ensinou vivendo.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="agradecimento">
+        <div class="container">
+          <div class="section-head">
+            <div class="pill">Agradecimento</div>
+            <h2>Algumas coisas merecem ser ditas com calma, porque ficaram grandes demais para caber no silêncio.</h2>
+            <p>
+              Esses agradecimentos são simples de ler, mas carregam uma vida
+              inteira de presença, cuidado e exemplo.
+            </p>
+          </div>
+
+          <div class="gratitude-grid">
+            <article class="glass-panel gratitude-card">
+              <small>Motivo 1</small>
+              <h3>Obrigada por ser força sem perder a delicadeza</h3>
+              <p>
+                Você ensinou que firmeza e ternura podem morar no mesmo coração,
+                e isso mudou a forma como eu vejo o mundo.
+              </p>
+            </article>
+
+            <article class="glass-panel gratitude-card">
+              <small>Motivo 2</small>
+              <h3>Obrigada por transformar cuidado em presença</h3>
+              <p>
+                Até nos dias corridos, seu jeito de cuidar sempre fez a vida
+                parecer mais organizada, mais quente e mais segura.
+              </p>
+            </article>
+
+            <article class="glass-panel gratitude-card">
+              <small>Motivo 3</small>
+              <h3>Obrigada por deixar amor nas pequenas coisas</h3>
+              <p>
+                Nos conselhos, nas risadas, nos detalhes e até nos silêncios,
+                você construiu memórias que continuam comigo todos os dias.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pergunta">
+        <div class="container">
+          <div class="section-head">
+            <div class="pill">Interação especial</div>
+            <h2>Mãe, posso continuar te lembrando do quanto você é o maior presente da nossa família?</h2>
+            <p>
+              Vale responder com sinceridade, mas já aviso que qualquer tentativa
+              de apertar o “não” vai passar por uma revisão afetiva.
+            </p>
+          </div>
+
+          <div class="glass-panel question-shell" id="questionShell">
+            <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+            <div class="question-grid">
+              <div class="glass-panel question-box">
+                <p class="question-helper">
+                  Toda vez que o “não” aparecer, ele vai ser reinterpretado com
+                  mais verdade e um toque de humor.
+                </p>
+
+                <div class="question-translation">
+                  <span>Tradução afetiva do “não”</span>
+                  <h3 id="twistText">Não tem como negar que você merece uma homenagem linda.</h3>
+                </div>
+
+                <div class="question-actions" id="questionActions">
+                  <button class="button-primary" id="yesButton" type="button">Pode e deve</button>
+                  <button class="button-ghost no-button" id="noButton" type="button">Não</button>
+                </div>
+
+                <div class="accepted-box" id="acceptedBox">
+                  <strong>Resultado final</strong>
+                  <p>
+                    Feliz Dia das Mães. Obrigada por cada abraço, por cada
+                    conselho e por fazer amor parecer verbo de todo dia.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="button-primary" href="#final">Ler mensagem final</a>
+                    <a class="button-secondary" href="#memorias">Rever memórias</a>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="glass-panel question-side">
+                <span>Bastidores do humor</span>
+                <h3 id="counterTitle">O “não” foi clicado 0 vezes.</h3>
+                <p id="reactionText">
+                  O botão ainda está em paz, mas a negação já está sendo observada com carinho.
+                </p>
+
+                <div class="side-diagnosis">
+                  <strong>Diagnóstico atual</strong>
+                  <p id="diagnosisText">
+                    Tentativa de negar ainda não registrada. Mas, sinceramente, a verdade já está ganhando.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="final">
+        <div class="container">
+          <div class="glass-panel final-card">
+            <div class="pill">Mensagem final</div>
+            <h2>
+              Que o seu Dia das Mães seja tão bonito quanto o amor que você
+              espalha.
+            </h2>
+            <p>
+              Se este site conseguiu te fazer sorrir, então ele cumpriu a
+              missão. Porque no fundo ele existe só para dizer, com calma e com
+              verdade, que sua presença deixa a vida mais bonita, mais forte e
+              mais cheia de sentido. Feliz Dia das Mães.
+            </p>
+            <div class="signature">Com todo meu amor, hoje e sempre.</div>
+            <div class="footer-note">
+              Se quiser adicionar vídeo ou música depois, basta colar o link
+              hospedado dentro deste arquivo.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const negationSteps = [
+        {
+          label: "Não",
+          phrase: "Não tem como negar que você merece uma homenagem linda.",
+          reaction: "O botão tentou negar, mas já perdeu no argumento.",
+          diagnosis: "Tentativa de negar detectada. Corrigindo a verdade com delicadeza."
+        },
+        {
+          label: "Não... pera",
+          phrase: "Não consigo esconder que você é a pessoa mais importante daqui.",
+          reaction: "A negação começou a ficar emotiva demais para continuar séria.",
+          diagnosis: "O “não” já está tropeçando no próprio carinho."
+        },
+        {
+          label: "Não vale isso",
+          phrase: "Não vale fingir que você não é a rainha oficial dessas memórias.",
+          reaction: "Entramos no estágio em que o humor já está vencendo a resistência.",
+          diagnosis: "Negação com fortes indícios de admiração explícita."
+        },
+        {
+          label: "Não estou resistindo",
+          phrase: "Não estou resistindo a admitir que seu amor moldou tudo de melhor em mim.",
+          reaction: "Agora já ficou claro que esse botão só está adiando o inevitável.",
+          diagnosis: "Sistema afetivo detectou colapso total da negação."
+        },
+        {
+          label: "Não consigo negar",
+          phrase: "Não consigo negar: eu te amo, te admiro e agradeço por tudo.",
+          reaction: "Fim da linha para o “não”. Só sobrou a parte verdadeira.",
+          diagnosis: "Negação encerrada por excesso comprovado de amor."
+        }
+      ];
+
+      const dodgeOffsets = [
+        { x: 0, y: 0 },
+        { x: 16, y: -8 },
+        { x: -18, y: 10 },
+        { x: 24, y: -10 },
+        { x: -12, y: 8 }
+      ];
+
+      const twistText = document.getElementById("twistText");
+      const reactionText = document.getElementById("reactionText");
+      const diagnosisText = document.getElementById("diagnosisText");
+      const counterTitle = document.getElementById("counterTitle");
+      const noButton = document.getElementById("noButton");
+      const yesButton = document.getElementById("yesButton");
+      const hearts = document.getElementById("hearts");
+      const questionShell = document.getElementById("questionShell");
+
+      let noClicks = 0;
+      let accepted = false;
+
+      function pluralize(value) {
+        return value === 1 ? "vez" : "vezes";
+      }
+
+      function renderState() {
+        const step = negationSteps[Math.min(noClicks, negationSteps.length - 1)];
+        const offset = dodgeOffsets[Math.min(noClicks, dodgeOffsets.length - 1)];
+
+        counterTitle.textContent = 'O “não” foi clicado ' + noClicks + " " + pluralize(noClicks) + ".";
+
+        if (accepted) {
+          twistText.textContent = "Sabia que o carinho ia vencer essa disputa.";
+          reactionText.textContent = "A brincadeira acabou do jeito certo: com carinho, coração e nenhuma chance para a dúvida.";
+          diagnosisText.textContent = "Negação encerrada por excesso de amor comprovado.";
+          noButton.style.transform = "translate(0, 0)";
+          return;
+        }
+
+        twistText.textContent = step.phrase;
+        reactionText.textContent = noClicks === 0
+          ? "O botão ainda está em paz, mas a negação já está sendo observada com carinho."
+          : step.reaction;
+        diagnosisText.textContent = noClicks === 0
+          ? "Tentativa de negar ainda não registrada. Mas, sinceramente, a verdade já está ganhando."
+          : step.diagnosis;
+        noButton.textContent = step.label;
+        noButton.style.transform = "translate(" + offset.x + "px, " + offset.y + "px)";
+      }
+
+      function createHearts() {
+        const heartConfig = [
+          { left: "7%", delay: "0s", duration: "4.2s" },
+          { left: "18%", delay: "0.4s", duration: "4.6s" },
+          { left: "30%", delay: "0.8s", duration: "4.9s" },
+          { left: "43%", delay: "0.2s", duration: "4.3s" },
+          { left: "56%", delay: "1.1s", duration: "5s" },
+          { left: "68%", delay: "0.6s", duration: "4.4s" },
+          { left: "80%", delay: "1.3s", duration: "4.8s" },
+          { left: "91%", delay: "0.9s", duration: "4.5s" }
+        ];
+
+        hearts.innerHTML = "";
+
+        heartConfig.forEach(function (item) {
+          const heart = document.createElement("span");
+          heart.className = "heart";
+          heart.textContent = "♥";
+          heart.style.left = item.left;
+          heart.style.setProperty("--delay", item.delay);
+          heart.style.setProperty("--duration", item.duration);
+          hearts.appendChild(heart);
+        });
+      }
+
+      function acceptAnswer() {
+        if (accepted) {
+          return;
+        }
+
+        accepted = true;
+        questionShell.classList.add("accepted");
+        createHearts();
+        renderState();
+      }
+
+      noButton.addEventListener("click", function () {
+        if (accepted) {
+          return;
+        }
+
+        if (noClicks < negationSteps.length - 1) {
+          noClicks += 1;
+          renderState();
+          return;
+        }
+
+        noClicks += 1;
+        acceptAnswer();
+      });
+
+      yesButton.addEventListener("click", acceptAnswer);
+
+      renderState();
+    </script>
+  </body>
+</html>
